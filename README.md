@@ -23,15 +23,16 @@ https://github.com/anapi76/LudotecaBackend.git
 - Spring Boot version 3.2.4
 - Java 17.0.13 or higher.
 - Maven
-- Spring Web
-- Spring Data JPA
-- H2 Database
 
 ## Add Dependencies
 
 To add a new dependency, search it in [Maven Repository](https://mvnrepository.com/) and add it to the `<dependencies>`
-section of the pom.xml
-file.
+section of the pom.xml file.
+
+- Spring Web
+- Spring Data JPA
+- H2 Database
+- Modelmapper
 
 ## Configuring Libraries
 
@@ -54,7 +55,7 @@ file.
 - **Description**: Retrieves all categories.
 - **HTTP Method**: `GET`
 
-#### 2. **PUT **
+#### 2. **PUT**
 
 - **Route**: /category
 - **Route**: /category/{id}
@@ -66,6 +67,11 @@ file.
 - **Route**: /category/{id}
 - **Description**: Delete a category.
 - **HTTP Method**: `DELETE`
+
+## Running Tests
+
+- **Unit Tests**
+- **Integration Tests**
 
 ## Documentation
 
