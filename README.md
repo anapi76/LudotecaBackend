@@ -68,6 +68,27 @@ section of the pom.xml file.
 - **Description**: Delete a category.
 - **HTTP Method**: `DELETE`
 
+### Author
+
+#### 1. **POST**
+
+- **Route**: /author
+- **Description**: Retrieves a paginated listing of authors.
+- **HTTP Method**: `POST`
+
+#### 2. **PUT**
+
+- **Route**: /author
+- **Route**: /author/{id}
+- **Description**: Creates a new author or updates an existing author.
+- **HTTP Method**: `PUT`
+
+#### 2. **DELETE**
+
+- **Route**: /author/{id}
+- **Description**: Delete an author.
+- **HTTP Method**: `DELETE`
+
 ## Running Tests
 
 - **Unit Tests**
