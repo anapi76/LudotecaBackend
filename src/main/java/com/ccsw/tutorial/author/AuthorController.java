@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -43,17 +44,20 @@ public class AuthorController {
 
         return new PageImpl<>(page.getContent().stream().map(e -> mapper.map(e, AuthorDto.class)).collect(Collectors.toList()), page.getPageable(), page.getTotalElements());
     }
-    /*public AuthorResponsePage findPage(@RequestBody AuthorSearchDto dto) {
 
-        Page<Author> page = this.authorService.findPage(dto);
+    /**
+     * Recupera un listado de autores {@link Author}
+     *
+     * @return {@link List} de {@link AuthorDto}
+     */
+    @Operation(summary = "Find", description = "Method that return a list of Authors")
+    @RequestMapping(path = "", method = RequestMethod.GET)
+    public List<AuthorDto> findAll() {
 
-        List<AuthorDto> authorDtos = page.getContent().stream().map(author -> mapper.map(author, AuthorDto.class)).collect(Collectors.toList());
+        List<Author> authors = this.authorService.findAll();
 
-        // Convertir Sort a List<SortRequest>
-        List<PageableRequest.SortRequest> sortRequests = page.getPageable().getSort().stream().map(order -> new PageableRequest.SortRequest(order.getProperty(), order.getDirection())).collect(Collectors.toList());
-
-        return new AuthorResponsePage(authorDtos, new PageableRequest(page.getPageable().getPageNumber(), page.getPageable().getPageSize(), sortRequests), page.getTotalElements());
-    }*/
+        return authors.stream().map(e -> mapper.map(e, AuthorDto.class)).collect(Collectors.toList());
+    }
 
     /**
      * Método para crear o actualizar un {@link Author}
@@ -66,7 +70,6 @@ public class AuthorController {
     public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody AuthorDto dto) {
 
         this.authorService.save(id, dto);
-
     }
 
     /**

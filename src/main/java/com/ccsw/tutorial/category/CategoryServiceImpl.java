@@ -31,13 +31,21 @@ public class CategoryServiceImpl implements CategoryService {
      * {@inheritDoc}
      */
     @Override
+    public Category get(Long id) {
+        return categoryRepository.findById(id).orElse(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void save(Long id, CategoryDto dto) {
         Category category;
 
         if (id == null) {
             category = new Category();
         } else {
-            category = this.categoryRepository.findById(id).orElse(null);
+            category = this.get(id);
         }
         category.setName(dto.getName());
         this.categoryRepository.save(category);
@@ -48,7 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public void delete(Long id) throws Exception {
-        if (this.categoryRepository.findById(id).orElse(null) == null) {
+        if (this.get(id) == null) {
             throw new Exception("Not exists");
         }
         this.categoryRepository.deleteById(id);

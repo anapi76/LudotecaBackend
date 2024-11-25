@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -41,6 +43,9 @@ public class AuthorIT {
     private TestRestTemplate restTemplate;
 
     ParameterizedTypeReference<ResponsePage<AuthorDto>> responseTypePage = new ParameterizedTypeReference<ResponsePage<AuthorDto>>() {
+    };
+
+    ParameterizedTypeReference<List<AuthorDto>> responseTypeList = new ParameterizedTypeReference<List<AuthorDto>>() {
     };
 
     @Test
@@ -69,6 +74,14 @@ public class AuthorIT {
         assertNotNull(response);
         assertEquals(TOTAL_AUTHORS, response.getBody().getTotalElements());
         assertEquals(elementsCount, response.getBody().getContent().size());
+    }
+
+    @Test
+    public void findAllShouldReturnAllAuthor() {
+        ResponseEntity<List<AuthorDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseTypeList);
+
+        assertNotNull(response);
+        assertEquals(TOTAL_AUTHORS, response.getBody().size());
     }
 
     @Test

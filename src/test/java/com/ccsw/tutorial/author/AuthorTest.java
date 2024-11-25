@@ -15,12 +15,12 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,6 +29,7 @@ public class AuthorTest {
     public static final Long EXISTS_AUTHOR_ID = 1L;
     public static final String AUTHOR_NAME = "ANA";
     public static final String AUTHOR_NATIONALITY = "ESPAÑOLA";
+    public static final Long NOT_EXISTS_AUTHOR_ID = 0L;
 
     @Mock
     AuthorRepository authorRepository;
@@ -65,6 +66,43 @@ public class AuthorTest {
         assertEquals(AUTHOR_NATIONALITY, result.getContent().get(0).getNationality());
 
         verify(authorRepository, times(1)).findAll(pageable);
+    }
+
+    @Test
+    public void findAllShouldReturnAllAuthors() {
+
+        List<Author> list = new ArrayList<>();
+        list.add(mock(Author.class));
+
+        when(authorRepository.findAll()).thenReturn(list);
+        List<Author> authors = authorService.findAll();
+
+        assertNotNull(authors);
+        assertEquals(1, authors.size());
+    }
+
+    @Test
+    public void getExistsAuthorIdShouldReturnAuthor() {
+
+        Author author = mock(Author.class);
+        when(author.getId()).thenReturn(EXISTS_AUTHOR_ID);
+        when(authorRepository.findById(EXISTS_AUTHOR_ID)).thenReturn(Optional.of(author));
+
+        Author authorResponse = authorService.get(EXISTS_AUTHOR_ID);
+
+        assertNotNull(authorResponse);
+        assertEquals(EXISTS_AUTHOR_ID, authorResponse.getId());
+    }
+
+    @Test
+    public void getNotExistAuthorIdShouldReturnNull() {
+
+        when(authorRepository.findById(NOT_EXISTS_AUTHOR_ID)).thenReturn(Optional.empty());
+
+        Author author = authorService.get(NOT_EXISTS_AUTHOR_ID);
+
+        assertNull(author);
+
     }
 
     @Test

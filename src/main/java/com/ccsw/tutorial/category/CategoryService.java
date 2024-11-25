@@ -18,6 +18,14 @@ public interface CategoryService {
     List<Category> findAll();
 
     /**
+     * Recupera un {@link Category} a través de su ID
+     *
+     * @param id PK de la entidad
+     * @return {@link Category}
+     */
+    Category get(Long id);
+
+    /**
      * Método para crear o actualizar una categoría
      *
      * @param id PK de la entidad

@@ -70,24 +70,45 @@ section of the pom.xml file.
 
 ### Author
 
-#### 1. **POST**
+#### 1. **GET**
+
+- **Route**: /author
+- **Description**: Retrieves all authors.
+- **HTTP Method**: `GET`
+
+#### 2. **POST**
 
 - **Route**: /author
 - **Description**: Retrieves a paginated listing of authors.
 - **HTTP Method**: `POST`
 
-#### 2. **PUT**
+#### 3. **PUT**
 
 - **Route**: /author
 - **Route**: /author/{id}
 - **Description**: Creates a new author or updates an existing author.
 - **HTTP Method**: `PUT`
 
-#### 2. **DELETE**
+#### 4. **DELETE**
 
 - **Route**: /author/{id}
 - **Description**: Delete an author.
 - **HTTP Method**: `DELETE`
+
+### Game
+
+#### 1. **GET**
+
+- **Route**: /game
+- **Description**: Retrieves a filtered list of Games by title and by category.
+- **HTTP Method**: `GET`
+
+#### 2. **PUT**
+
+- **Route**: /game
+- **Route**: /game/{id}
+- **Description**: Creates a new game or updates an existing game.
+- **HTTP Method**: `PUT`
 
 ## Running Tests
 
