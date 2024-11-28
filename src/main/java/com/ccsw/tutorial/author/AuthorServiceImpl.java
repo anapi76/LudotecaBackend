@@ -3,6 +3,7 @@ package com.ccsw.tutorial.author;
 import com.ccsw.tutorial.author.model.Author;
 import com.ccsw.tutorial.author.model.AuthorDto;
 import com.ccsw.tutorial.author.model.AuthorSearchDto;
+import com.ccsw.tutorial.exceptions.AuthorNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public Author get(Long id) {
+
         return authorRepository.findById(id).orElse(null);
     }
 
@@ -53,13 +55,10 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public void save(Long id, AuthorDto data) {
+
         Author author;
 
-        if (id == null) {
-            author = new Author();
-        } else {
-            author = this.get(id);
-        }
+        author = (id == null) ? new Author() : this.get(id);
 
         BeanUtils.copyProperties(data, author, "id");
 
@@ -70,10 +69,10 @@ public class AuthorServiceImpl implements AuthorService {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Long id) throws Exception {
+    public void delete(Long id) {
 
         if (this.get(id) == null) {
-            throw new Exception("Not exists");
+            throw new AuthorNotFoundException("Author Not exists");
         }
 
         this.authorRepository.deleteById(id);

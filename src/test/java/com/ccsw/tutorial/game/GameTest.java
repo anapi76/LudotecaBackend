@@ -77,26 +77,4 @@ public class GameTest {
         verify(gameRepository).save(game);
     }
 
-     /*   @Test
-    public void findAllShouldReturnAllGames() {
-        List<Game> list = new ArrayList<>();
-        list.add(mock(Game.class));
-
-        when(gameRepository.findAll()).thenReturn(list);
-        List<Game> games = gameService.findAll();
-
-        assertNotNull(games);
-        assertEquals(1, games.size());
-    }*/
-
-   /* @Test
-    public void deleteExistsGameIdShouldDelete() throws Exception {
-
-        Game game = mock(Game.class);
-        when(gameRepository.findById(EXISTS_GAME_ID)).thenReturn(Optional.of(game));
-
-        gameService.delete(EXISTS_GAME_ID);
-
-        verify(gameRepository).deleteById(EXISTS_GAME_ID);
-    }*/
 }
