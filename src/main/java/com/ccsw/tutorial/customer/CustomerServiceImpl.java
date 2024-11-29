@@ -33,14 +33,6 @@ public class CustomerServiceImpl implements CustomerService {
      * {@inheritDoc}
      */
     @Override
-    public Customer getByName(String name) {
-        return customerRepository.findByName(name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public List<Customer> findAll() {
 
         return (List<Customer>) this.customerRepository.findAll();
@@ -52,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void save(Long id, CustomerDto dto) {
 
-        if (getByName(dto.getName()) != null) {
+        if (customerRepository.existsByName(dto.getName())) {
             throw new NameAlreadyExistsException("Invalid name");
         }
 

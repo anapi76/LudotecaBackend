@@ -20,14 +20,6 @@ public interface CustomerService {
     public Customer get(Long id);
 
     /**
-     * Recupera un {@link Customer} a través de su nombre
-     *
-     * @param name de la entidad
-     * @return {@link Customer } o {@code null}
-     */
-    public Customer getByName(String name);
-
-    /**
      * Método para recuperar todos los clientes
      *
      * @return {@link List} de {@link Customer}

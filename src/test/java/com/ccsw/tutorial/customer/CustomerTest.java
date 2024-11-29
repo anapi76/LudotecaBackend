@@ -67,30 +67,6 @@ public class CustomerTest {
     }
 
     @Test
-    public void getByNameExistsCustomerIdNameShouldReturnCustomer() {
-
-        Customer customer = mock(Customer.class);
-        when(customer.getName()).thenReturn(CUSTOMER_NAME);
-        when(customerRepository.findByName(CUSTOMER_NAME)).thenReturn(customer);
-
-        Customer customerResponse = customerService.getByName(CUSTOMER_NAME);
-
-        assertNotNull(customerResponse);
-        assertEquals(CUSTOMER_NAME, customerResponse.getName());
-    }
-
-    @Test
-    public void getByNameNotExistCustomerIdNameShouldReturnNull() {
-
-        when(customerRepository.findByName(NOT_EXISTS_CUSTOMER_NAME)).thenReturn(null);
-
-        Customer customer = customerService.getByName(NOT_EXISTS_CUSTOMER_NAME);
-
-        assertNull(customer);
-
-    }
-
-    @Test
     public void saveNotExistsCustomerIdAndCustomerNameIsValidShouldInsert() {
 
         CustomerDto customerDto = new CustomerDto();
@@ -118,10 +94,12 @@ public class CustomerTest {
 
     @Test
     public void saveCustomerIdNameAlreadyExistsShouldReturnNameAlreadyExistsException() {
+        CustomerDto customerDto = new CustomerDto();
+        customerDto.setName(CUSTOMER_NAME);
 
-        when(customerRepository.findByName(CUSTOMER_NAME)).thenThrow(NameAlreadyExistsException.class);
+        when(customerRepository.existsByName(CUSTOMER_NAME)).thenThrow(NameAlreadyExistsException.class);
 
-        assertThrows(NameAlreadyExistsException.class, () -> customerService.getByName(CUSTOMER_NAME));
+        assertThrows(NameAlreadyExistsException.class, () -> customerService.save(1L, customerDto));
     }
 
     @Test
