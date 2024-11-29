@@ -1,19 +1,22 @@
-package com.ccsw.tutorial.author.model;
+package com.ccsw.tutorial.customer.model;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.*;
 
 /**
- * @author ccsw
+ * @author Ana Piqueras
  *
  */
-public class AuthorDto {
+@Entity
+@Table(name = "customer")
+public class Customer {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotBlank
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
-
-    private String nationality;
 
     /**
      * @return id
@@ -47,19 +50,4 @@ public class AuthorDto {
         this.name = name;
     }
 
-    /**
-     * @return nationality
-     */
-    public String getNationality() {
-
-        return this.nationality;
-    }
-
-    /**
-     * @param nationality new value of {@link #getNationality}.
-     */
-    public void setNationality(String nationality) {
-
-        this.nationality = nationality;
-    }
 }

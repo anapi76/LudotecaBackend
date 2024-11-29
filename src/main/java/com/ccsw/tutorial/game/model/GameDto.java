@@ -2,20 +2,27 @@ package com.ccsw.tutorial.game.model;
 
 import com.ccsw.tutorial.author.model.AuthorDto;
 import com.ccsw.tutorial.category.model.CategoryDto;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @author ccsw
  *
  */
 public class GameDto {
+
     private Long id;
 
+    @NotBlank
     private String title;
 
+    @NotNull
     private String age;
 
+    @NotNull
     private CategoryDto category;
 
+    @NotNull
     private AuthorDto author;
 
     /**

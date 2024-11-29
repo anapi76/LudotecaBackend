@@ -4,6 +4,7 @@ import com.ccsw.tutorial.category.model.Category;
 import com.ccsw.tutorial.category.model.CategoryDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,6 @@ public class CategoryController {
      * @return {@link List} de {@link CategoryDto}
      */
     @Operation(summary = "Find", description = "Method that return a list of Categories")
-    //@RequestMapping(path = "", method = RequestMethod.GET)
     @GetMapping
     public List<CategoryDto> findAll() {
         List<Category> categories = this.categoryService.findAll();
@@ -47,9 +47,8 @@ public class CategoryController {
      * @param dto datos de la entidad
      */
     @Operation(summary = "Save or Update", description = "Method that saves or updates a Category")
-    //@RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
     @PutMapping(path = { "", "/{id}" })
-    public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDto dto) {
+    public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody @Valid CategoryDto dto) {
         this.categoryService.save(id, dto);
     }
 
@@ -59,9 +58,8 @@ public class CategoryController {
      * @param id PK de la entidad
      */
     @Operation(summary = "Delete", description = "Method that deletes a Category")
-    //@RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id) throws Exception {
+    public void delete(@PathVariable("id") Long id) {
         this.categoryService.delete(id);
     }
 }

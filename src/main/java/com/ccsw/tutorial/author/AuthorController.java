@@ -5,6 +5,7 @@ import com.ccsw.tutorial.author.model.AuthorDto;
 import com.ccsw.tutorial.author.model.AuthorSearchDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,7 +38,7 @@ public class AuthorController {
      * @return {@link Page} de {@link AuthorDto}
      */
     @Operation(summary = "Find Page", description = "Method that return a page of Authors")
-    @RequestMapping(path = "", method = RequestMethod.POST)
+    @PostMapping
     public Page<AuthorDto> findPage(@RequestBody AuthorSearchDto dto) {
 
         Page<Author> page = this.authorService.findPage(dto);
@@ -51,7 +52,7 @@ public class AuthorController {
      * @return {@link List} de {@link AuthorDto}
      */
     @Operation(summary = "Find", description = "Method that return a list of Authors")
-    @RequestMapping(path = "", method = RequestMethod.GET)
+    @GetMapping
     public List<AuthorDto> findAll() {
 
         List<Author> authors = this.authorService.findAll();
@@ -66,8 +67,8 @@ public class AuthorController {
      * @param dto datos de la entidad
      */
     @Operation(summary = "Save or Update", description = "Method that saves or updates a Author")
-    @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
-    public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody AuthorDto dto) {
+    @PutMapping(path = { "", "/{id}" })
+    public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody @Valid AuthorDto dto) {
 
         this.authorService.save(id, dto);
     }
@@ -78,8 +79,8 @@ public class AuthorController {
      * @param id PK de la entidad
      */
     @Operation(summary = "Delete", description = "Method that deletes a Author")
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long id) throws Exception {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id) {
 
         this.authorService.delete(id);
 

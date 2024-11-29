@@ -1,19 +1,17 @@
-package com.ccsw.tutorial.author.model;
+package com.ccsw.tutorial.customer.model;
 
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * @author ccsw
+ * @author Ana Piqueras
  *
  */
-public class AuthorDto {
+public class CustomerDto {
 
     private Long id;
 
     @NotBlank
     private String name;
-
-    private String nationality;
 
     /**
      * @return id
@@ -45,21 +43,5 @@ public class AuthorDto {
     public void setName(String name) {
 
         this.name = name;
-    }
-
-    /**
-     * @return nationality
-     */
-    public String getNationality() {
-
-        return this.nationality;
-    }
-
-    /**
-     * @param nationality new value of {@link #getNationality}.
-     */
-    public void setNationality(String nationality) {
-
-        this.nationality = nationality;
     }
 }

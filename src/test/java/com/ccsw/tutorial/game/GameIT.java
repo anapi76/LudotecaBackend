@@ -237,14 +237,23 @@ public class GameIT {
     }
 
     @Test
-    public void modifyWithNotExistIdShouldThrowException() {
+    public void modifyWithNotExistIdShouldNotFound() {
 
         GameDto dto = new GameDto();
+        AuthorDto authorDto = new AuthorDto();
+        authorDto.setId(1L);
+
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setId(1L);
+
         dto.setTitle(NEW_TITLE);
+        dto.setAge("18");
+        dto.setAuthor(authorDto);
+        dto.setCategory(categoryDto);
 
         ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + NOT_EXISTS_GAME_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
 
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
 }

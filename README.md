@@ -45,6 +45,16 @@ section of the pom.xml file.
 - Modify the `application.properties` file adding the configuration to use H2 as an in-memory database
 - http://localhost:8080/h2-console
 
+## Exceptions
+
+- ### Custom Exception Handling
+
+Custom exceptions are used to handle specific errors, such as when a game is not found.
+
+- ### Global Exception Handler
+
+Handle exceptions globally with @ControllerAdvice:
+
 ## Functionalities
 
 ### Category
@@ -109,6 +119,27 @@ section of the pom.xml file.
 - **Route**: /game/{id}
 - **Description**: Creates a new game or updates an existing game.
 - **HTTP Method**: `PUT`
+
+### Customer
+
+#### 1. **GET**
+
+- **Route**: /customer
+- **Description**: Retrieves all customers.
+- **HTTP Method**: `GET`
+
+#### 2. **PUT**
+
+- **Route**: /customer
+- **Route**: /customer/{id}
+- **Description**: Creates a new customer or updates an existing category.
+- **HTTP Method**: `PUT`
+
+#### 3. **DELETE**
+
+- **Route**: /customer/{id}
+- **Description**: Delete a customer.
+- **HTTP Method**: `DELETE`
 
 ## Running Tests
 

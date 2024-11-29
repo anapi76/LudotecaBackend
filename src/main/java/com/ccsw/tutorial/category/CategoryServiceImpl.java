@@ -2,6 +2,7 @@ package com.ccsw.tutorial.category;
 
 import com.ccsw.tutorial.category.model.Category;
 import com.ccsw.tutorial.category.model.CategoryDto;
+import com.ccsw.tutorial.exceptions.CategoryNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,10 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public Category get(Long id) {
-        return categoryRepository.findById(id).orElse(null);
+
+        //return categoryRepository.findById(id).orElse(null);
+        return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("Category not exists"));
+
     }
 
     /**
@@ -42,11 +46,8 @@ public class CategoryServiceImpl implements CategoryService {
     public void save(Long id, CategoryDto dto) {
         Category category;
 
-        if (id == null) {
-            category = new Category();
-        } else {
-            category = this.get(id);
-        }
+        category = (id == null) ? new Category() : this.get(id);
+
         category.setName(dto.getName());
         this.categoryRepository.save(category);
     }
@@ -55,10 +56,11 @@ public class CategoryServiceImpl implements CategoryService {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Long id) throws Exception {
-        if (this.get(id) == null) {
-            throw new Exception("Not exists");
-        }
+    public void delete(Long id) {
+        /*if (this.get(id) == null) {
+            throw new CategoryNotFoundException("Category Not exists");
+        }*/
+        this.get(id);
         this.categoryRepository.deleteById(id);
     }
 }

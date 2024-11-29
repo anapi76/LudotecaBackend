@@ -4,6 +4,7 @@ import com.ccsw.tutorial.author.model.Author;
 import com.ccsw.tutorial.author.model.AuthorDto;
 import com.ccsw.tutorial.author.model.AuthorSearchDto;
 import com.ccsw.tutorial.common.pagination.PageableRequest;
+import com.ccsw.tutorial.exceptions.AuthorNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -97,11 +98,9 @@ public class AuthorTest {
     @Test
     public void getNotExistAuthorIdShouldReturnNull() {
 
-        when(authorRepository.findById(NOT_EXISTS_AUTHOR_ID)).thenReturn(Optional.empty());
+        when(authorRepository.findById(NOT_EXISTS_AUTHOR_ID)).thenThrow(AuthorNotFoundException.class);
 
-        Author author = authorService.get(NOT_EXISTS_AUTHOR_ID);
-
-        assertNull(author);
+        assertThrows(AuthorNotFoundException.class, () -> authorService.get(NOT_EXISTS_AUTHOR_ID));
 
     }
 
@@ -135,7 +134,7 @@ public class AuthorTest {
     }
 
     @Test
-    public void deleteExistsAuthorIdShouldDelete() throws Exception {
+    public void deleteExistsAuthorIdShouldDelete() {
 
         Author author = mock(Author.class);
         when(authorRepository.findById(EXISTS_AUTHOR_ID)).thenReturn(Optional.of(author));
@@ -143,6 +142,15 @@ public class AuthorTest {
         authorService.delete(EXISTS_AUTHOR_ID);
 
         verify(authorRepository).deleteById(EXISTS_AUTHOR_ID);
+    }
+
+    @Test
+    public void deleteNotExistsAuthorIdShouldAuthorNotFoundException() {
+
+        when(authorRepository.findById(NOT_EXISTS_AUTHOR_ID)).thenThrow(AuthorNotFoundException.class);
+
+        assertThrows(AuthorNotFoundException.class, () -> authorService.delete(NOT_EXISTS_AUTHOR_ID));
+
     }
 
 }

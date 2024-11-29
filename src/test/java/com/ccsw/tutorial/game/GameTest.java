@@ -1,6 +1,12 @@
 package com.ccsw.tutorial.game;
 
+import com.ccsw.tutorial.author.AuthorRepository;
+import com.ccsw.tutorial.author.AuthorServiceImpl;
+import com.ccsw.tutorial.author.model.Author;
+import com.ccsw.tutorial.author.model.AuthorDto;
+import com.ccsw.tutorial.category.CategoryServiceImpl;
 import com.ccsw.tutorial.category.model.Category;
+import com.ccsw.tutorial.category.model.CategoryDto;
 import com.ccsw.tutorial.game.model.Game;
 import com.ccsw.tutorial.game.model.GameDto;
 import org.junit.jupiter.api.Test;
@@ -25,8 +31,20 @@ public class GameTest {
     public static final String GAME_TITLE = "GAME1";
     public static final Long EXISTS_CATEGORY_ID = 1L;
 
+    public static final String AUTHOR_NAME = "NAME";
+    public static final String CATEGORY_NAME = "NAME";
+
     @Mock
-    GameRepository gameRepository;
+    private AuthorRepository authorRepository;  // Mock del repositorio de Author
+
+    @Mock
+    private AuthorServiceImpl authorService;  // Mock del servicio de Author
+
+    @Mock
+    private GameRepository gameRepository;
+
+    @Mock
+    private CategoryServiceImpl categoryService;
     @InjectMocks
     GameServiceImpl gameService;
 
@@ -57,6 +75,24 @@ public class GameTest {
         GameDto gameDto = new GameDto();
         gameDto.setTitle(GAME_TITLE);
 
+        AuthorDto authorDto = new AuthorDto();
+        authorDto.setId(1L);
+
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setId(1L);
+
+        gameDto.setAge("18");
+        gameDto.setAuthor(authorDto);
+        gameDto.setCategory(categoryDto);
+
+        Author author = new Author();
+        author.setName(AUTHOR_NAME);
+        Category category = new Category();
+        category.setName(CATEGORY_NAME);
+
+        when(authorService.get(1L)).thenReturn(author);
+        when(categoryService.get(1L)).thenReturn(category);
+
         ArgumentCaptor<Game> game = ArgumentCaptor.forClass(Game.class);
         gameService.save(null, gameDto);
 
@@ -70,6 +106,24 @@ public class GameTest {
         GameDto gameDto = new GameDto();
         gameDto.setTitle(GAME_TITLE);
 
+        AuthorDto authorDto = new AuthorDto();
+        authorDto.setId(1L);
+
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setId(1L);
+
+        gameDto.setAge("18");
+        gameDto.setAuthor(authorDto);
+        gameDto.setCategory(categoryDto);
+
+        Author author = new Author();
+        author.setName(AUTHOR_NAME);
+        Category category = new Category();
+        category.setName(CATEGORY_NAME);
+
+        when(authorService.get(1L)).thenReturn(author);
+        when(categoryService.get(1L)).thenReturn(category);
+
         Game game = mock(Game.class);
         when(gameRepository.findById(EXISTS_GAME_ID)).thenReturn(Optional.of(game));
         gameService.save(EXISTS_GAME_ID, gameDto);
@@ -77,26 +131,4 @@ public class GameTest {
         verify(gameRepository).save(game);
     }
 
-     /*   @Test
-    public void findAllShouldReturnAllGames() {
-        List<Game> list = new ArrayList<>();
-        list.add(mock(Game.class));
-
-        when(gameRepository.findAll()).thenReturn(list);
-        List<Game> games = gameService.findAll();
-
-        assertNotNull(games);
-        assertEquals(1, games.size());
-    }*/
-
-   /* @Test
-    public void deleteExistsGameIdShouldDelete() throws Exception {
-
-        Game game = mock(Game.class);
-        when(gameRepository.findById(EXISTS_GAME_ID)).thenReturn(Optional.of(game));
-
-        gameService.delete(EXISTS_GAME_ID);
-
-        verify(gameRepository).deleteById(EXISTS_GAME_ID);
-    }*/
 }
