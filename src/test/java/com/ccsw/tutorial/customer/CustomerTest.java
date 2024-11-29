@@ -60,11 +60,9 @@ public class CustomerTest {
     @Test
     public void getNotExistCustomerIdShouldReturnNull() {
 
-        when(customerRepository.findById(NOT_EXISTS_CUSTOMER_ID)).thenReturn(Optional.empty());
+        when(customerRepository.findById(NOT_EXISTS_CUSTOMER_ID)).thenThrow(CustomerNotFoundException.class);
 
-        Customer customer = customerService.get(NOT_EXISTS_CUSTOMER_ID);
-
-        assertNull(customer);
+        assertThrows(CustomerNotFoundException.class, () -> customerService.get(NOT_EXISTS_CUSTOMER_ID));
 
     }
 
@@ -73,7 +71,7 @@ public class CustomerTest {
 
         Customer customer = mock(Customer.class);
         when(customer.getName()).thenReturn(CUSTOMER_NAME);
-        when(customerRepository.findByName(CUSTOMER_NAME)).thenReturn(Optional.of(customer));
+        when(customerRepository.findByName(CUSTOMER_NAME)).thenReturn(customer);
 
         Customer customerResponse = customerService.getByName(CUSTOMER_NAME);
 
@@ -84,7 +82,7 @@ public class CustomerTest {
     @Test
     public void getByNameNotExistCustomerIdNameShouldReturnNull() {
 
-        when(customerRepository.findByName(NOT_EXISTS_CUSTOMER_NAME)).thenReturn(Optional.empty());
+        when(customerRepository.findByName(NOT_EXISTS_CUSTOMER_NAME)).thenReturn(null);
 
         Customer customer = customerService.getByName(NOT_EXISTS_CUSTOMER_NAME);
 

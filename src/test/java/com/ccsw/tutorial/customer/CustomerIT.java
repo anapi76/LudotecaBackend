@@ -52,25 +52,6 @@ public class CustomerIT {
     }
 
     @Test
-    public void findByNameShouldReturnCustomer() {
-        CustomerDto dto = new CustomerDto();
-        dto.setName(CUSTOMER_NAME);
-
-        ResponseEntity<CustomerDto> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + CUSTOMER_NAME, HttpMethod.GET, null, responseTypeCustomer);
-
-        assertNotNull(response);
-        assertEquals(CUSTOMER_NAME, response.getBody().getName());
-    }
-
-    @Test
-    public void findByNameShouldReturnInternalError() {
-
-        ResponseEntity<CustomerDto> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + NEW_CUSTOMER_NAME, HttpMethod.GET, null, responseTypeCustomer);
-
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-    }
-
-    @Test
     public void saveWithoutIdShouldCreateNewCustomer() {
 
         CustomerDto dto = new CustomerDto();
@@ -107,14 +88,14 @@ public class CustomerIT {
     }
 
     @Test
-    public void modifyWithNotExistIdShouldInternalError() {
+    public void modifyWithNotExistIdShouldNotFound() {
 
         CustomerDto dto = new CustomerDto();
         dto.setName(NEW_CUSTOMER_NAME);
 
         ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + NEW_CUSTOMER_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
 
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     @Test
@@ -128,10 +109,10 @@ public class CustomerIT {
     }
 
     @Test
-    public void deleteWithNotExistsIdShouldInternalError() {
+    public void deleteWithNotExistsIdShouldNotFound() {
 
         ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + NEW_CUSTOMER_ID, HttpMethod.DELETE, null, Void.class);
 
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 }

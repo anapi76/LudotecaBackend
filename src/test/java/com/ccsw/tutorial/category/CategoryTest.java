@@ -2,6 +2,7 @@ package com.ccsw.tutorial.category;
 
 import com.ccsw.tutorial.category.model.Category;
 import com.ccsw.tutorial.category.model.CategoryDto;
+import com.ccsw.tutorial.exceptions.CategoryNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -56,11 +57,9 @@ public class CategoryTest {
     @Test
     public void getNotExistCategoryIdShouldReturnNull() {
 
-        when(categoryRepository.findById(NOT_EXISTS_CATEGORY_ID)).thenReturn(Optional.empty());
+        when(categoryRepository.findById(NOT_EXISTS_CATEGORY_ID)).thenThrow(CategoryNotFoundException.class);
 
-        Category category = categoryService.get(NOT_EXISTS_CATEGORY_ID);
-
-        assertNull(category);
+        assertThrows(CategoryNotFoundException.class, () -> categoryService.get(NOT_EXISTS_CATEGORY_ID));
 
     }
 
@@ -99,5 +98,13 @@ public class CategoryTest {
         categoryService.delete(EXISTS_CATEGORY_ID);
 
         verify(categoryRepository).deleteById(EXISTS_CATEGORY_ID);
+    }
+
+    @Test
+    public void deleteNotExistsCategoryIdShouldCategoryNotFoundException() throws Exception {
+
+        when(categoryRepository.findById(NOT_EXISTS_CATEGORY_ID)).thenThrow(CategoryNotFoundException.class);
+
+        assertThrows(CategoryNotFoundException.class, () -> categoryService.delete(NOT_EXISTS_CATEGORY_ID));
     }
 }

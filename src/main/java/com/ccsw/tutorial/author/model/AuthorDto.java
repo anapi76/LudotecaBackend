@@ -1,5 +1,7 @@
 package com.ccsw.tutorial.author.model;
 
+import jakarta.validation.constraints.NotBlank;
+
 /**
  * @author ccsw
  *
@@ -8,6 +10,7 @@ public class AuthorDto {
 
     private Long id;
 
+    @NotBlank
     private String name;
 
     private String nationality;

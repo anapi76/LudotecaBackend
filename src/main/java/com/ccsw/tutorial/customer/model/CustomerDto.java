@@ -1,5 +1,7 @@
 package com.ccsw.tutorial.customer.model;
 
+import jakarta.validation.constraints.NotBlank;
+
 /**
  * @author Ana Piqueras
  *
@@ -7,6 +9,8 @@ package com.ccsw.tutorial.customer.model;
 public class CustomerDto {
 
     private Long id;
+
+    @NotBlank
     private String name;
 
     /**

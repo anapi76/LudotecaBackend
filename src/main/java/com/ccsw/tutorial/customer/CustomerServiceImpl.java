@@ -26,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public Customer get(Long id) {
-        return customerRepository.findById(id).orElse(null);
+        return customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException("Customer not exists"));
     }
 
     /**
@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public Customer getByName(String name) {
-        return customerRepository.findByName(name).orElse(null);
+        return customerRepository.findByName(name);
     }
 
     /**
@@ -58,7 +58,6 @@ public class CustomerServiceImpl implements CustomerService {
 
         Customer customer;
         customer = (id == null) ? new Customer() : this.get(id);
-
         customer.setName(dto.getName());
         this.customerRepository.save(customer);
     }
@@ -68,10 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public void delete(Long id) {
-        if (this.get(id) == null) {
-            throw new CustomerNotFoundException("Customer not exists");
-        }
+        this.get(id);
         this.customerRepository.deleteById(id);
     }
-
 }

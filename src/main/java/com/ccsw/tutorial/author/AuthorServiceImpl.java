@@ -47,7 +47,8 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author get(Long id) {
 
-        return authorRepository.findById(id).orElse(null);
+        //return authorRepository.findById(id).orElse(null);
+        return authorRepository.findById(id).orElseThrow(() -> new AuthorNotFoundException("Author not exists"));
     }
 
     /**
@@ -71,10 +72,10 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void delete(Long id) {
 
-        if (this.get(id) == null) {
+       /* if (this.get(id) == null) {
             throw new AuthorNotFoundException("Author Not exists");
-        }
-
+        }*/
+        this.get(id);
         this.authorRepository.deleteById(id);
 
     }

@@ -3,6 +3,7 @@ package com.ccsw.tutorial.game;
 import com.ccsw.tutorial.author.AuthorService;
 import com.ccsw.tutorial.category.CategoryService;
 import com.ccsw.tutorial.common.criteria.SearchCriteria;
+import com.ccsw.tutorial.exceptions.GameNotFoundException;
 import com.ccsw.tutorial.game.model.Game;
 import com.ccsw.tutorial.game.model.GameDto;
 import jakarta.transaction.Transactional;
@@ -51,7 +52,7 @@ public class GameServiceImpl implements GameService {
 
         Game game;
 
-        game = (id == null) ? new Game() : this.gameRepository.findById(id).orElse(null);
+        game = (id == null) ? new Game() : this.gameRepository.findById(id).orElseThrow(() -> new GameNotFoundException("Game not exists"));
 
         BeanUtils.copyProperties(dto, game, "id", "author", "category");
         game.setAuthor(authorService.get(dto.getAuthor().getId()));

@@ -128,20 +128,14 @@ Handle exceptions globally with @ControllerAdvice:
 - **Description**: Retrieves all customers.
 - **HTTP Method**: `GET`
 
-#### 2. **GET**
-
-- **Route**: /customer/{name}
-- **Description**: Retrieves a customer.
-- **HTTP Method**: `GET`
-
-#### 3. **PUT**
+#### 2. **PUT**
 
 - **Route**: /customer
 - **Route**: /customer/{id}
 - **Description**: Creates a new customer or updates an existing category.
 - **HTTP Method**: `PUT`
 
-#### 4. **DELETE**
+#### 3. **DELETE**
 
 - **Route**: /customer/{id}
 - **Description**: Delete a customer.

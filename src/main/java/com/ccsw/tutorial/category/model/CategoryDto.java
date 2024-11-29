@@ -1,11 +1,15 @@
 package com.ccsw.tutorial.category.model;
 
+import jakarta.validation.constraints.NotBlank;
+
 /**
  * @author ccsw
  *
  */
 public class CategoryDto {
     private Long id;
+
+    @NotBlank
     private String name;
 
     /**

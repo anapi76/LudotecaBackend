@@ -33,7 +33,10 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public Category get(Long id) {
-        return categoryRepository.findById(id).orElse(null);
+
+        //return categoryRepository.findById(id).orElse(null);
+        return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("Category not exists"));
+
     }
 
     /**
@@ -54,9 +57,10 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public void delete(Long id) {
-        if (this.get(id) == null) {
+        /*if (this.get(id) == null) {
             throw new CategoryNotFoundException("Category Not exists");
-        }
+        }*/
+        this.get(id);
         this.categoryRepository.deleteById(id);
     }
 }
