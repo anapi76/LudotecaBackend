@@ -47,7 +47,7 @@ public class AuthorTest {
     private Pageable pageable; // Mock de Pageable
 
     @Test
-    public void findAllShouldReturnAllCategoriesByPage() {
+    public void findAllShouldReturnAllAuthorsByPage() {
 
         Author author1 = new Author();
         author1.setName(AUTHOR_NAME);
