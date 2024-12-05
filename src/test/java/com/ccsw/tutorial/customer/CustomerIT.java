@@ -25,7 +25,6 @@ public class CustomerIT {
     public static final String LOCALHOST = "http://localhost:";
     public static final String SERVICE_PATH = "/customer";
     public static final Long NEW_CUSTOMER_ID = 6L;
-    public static final String CUSTOMER_NAME = "Cliente 5";
     public static final String NEW_CUSTOMER_NAME = "Cliente 6";
     public static final Long MODIFY_CUSTOMER_ID = 3L;
     public static final Long DELETE_CUSTOMER_ID = 2L;

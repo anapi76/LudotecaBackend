@@ -1,6 +1,5 @@
 package com.ccsw.tutorial.game;
 
-import com.ccsw.tutorial.author.AuthorRepository;
 import com.ccsw.tutorial.author.AuthorServiceImpl;
 import com.ccsw.tutorial.author.model.Author;
 import com.ccsw.tutorial.author.model.AuthorDto;
@@ -33,9 +32,6 @@ public class GameTest {
 
     public static final String AUTHOR_NAME = "NAME";
     public static final String CATEGORY_NAME = "NAME";
-
-    @Mock
-    private AuthorRepository authorRepository;  // Mock del repositorio de Author
 
     @Mock
     private AuthorServiceImpl authorService;  // Mock del servicio de Author

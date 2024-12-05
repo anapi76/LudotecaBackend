@@ -141,6 +141,26 @@ Handle exceptions globally with @ControllerAdvice:
 - **Description**: Delete a customer.
 - **HTTP Method**: `DELETE`
 
+### Loan
+
+#### 1. **GET**
+
+- **Route**: /loan
+- **Description**: Retrieves a filtered list paginated of Loans by game, customer and date.
+- **HTTP Method**: `POST`
+
+#### 2. **PUT**
+
+- **Route**: /loan
+- **Description**: Creates a new loan.
+- **HTTP Method**: `PUT`
+
+#### 3. **DELETE**
+
+- **Route**: /loan/{id}
+- **Description**: Delete a loan.
+- **HTTP Method**: `DELETE`
+
 ## Running Tests
 
 - **Unit Tests**

@@ -55,13 +55,13 @@ public class AuthorServiceImpl implements AuthorService {
      * {@inheritDoc}
      */
     @Override
-    public void save(Long id, AuthorDto data) {
+    public void save(Long id, AuthorDto dto) {
 
         Author author;
 
         author = (id == null) ? new Author() : this.get(id);
 
-        BeanUtils.copyProperties(data, author, "id");
+        BeanUtils.copyProperties(dto, author, "id");
 
         this.authorRepository.save(author);
     }

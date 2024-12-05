@@ -1,7 +1,7 @@
 package com.ccsw.tutorial.loan.model;
 
-import com.ccsw.tutorial.customer.model.Customer;
-import com.ccsw.tutorial.game.model.Game;
+import com.ccsw.tutorial.customer.model.CustomerDto;
+import com.ccsw.tutorial.game.model.GameDto;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
@@ -11,10 +11,10 @@ public class LoanDto {
     private Long id;
 
     @NotNull
-    private Game game;
+    private GameDto game;
 
     @NotNull
-    private Customer customer;
+    private CustomerDto customer;
 
     @NotNull
     private LocalDate loanDate;
@@ -39,28 +39,28 @@ public class LoanDto {
     /**
      * @return game
      */
-    public Game getGame() {
+    public GameDto getGame() {
         return game;
     }
 
     /**
      * @param game new value of {@link #getGame}.
      */
-    public void setGame(Game game) {
+    public void setGame(GameDto game) {
         this.game = game;
     }
 
     /**
      * @return customer
      */
-    public Customer getCustomer() {
+    public CustomerDto getCustomer() {
         return customer;
     }
 
     /**
      * @param customer new value of {@link #getCustomer}.
      */
-    public void setCustomer(Customer customer) {
+    public void setCustomer(CustomerDto customer) {
         this.customer = customer;
     }
 

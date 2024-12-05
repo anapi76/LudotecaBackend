@@ -24,7 +24,6 @@ public class CustomerTest {
     public static final Long EXISTS_CUSTOMER_ID = 1L;
     public static final String CUSTOMER_NAME = "CUSTOMER1";
     public static final Long NOT_EXISTS_CUSTOMER_ID = 0L;
-    public static final String NOT_EXISTS_CUSTOMER_NAME = "";
 
     @Mock
     CustomerRepository customerRepository;
@@ -58,7 +57,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void getNotExistCustomerIdShouldReturnNull() {
+    public void getNotExistCustomerIdShouldReturnCustomerNotFoundException() {
 
         when(customerRepository.findById(NOT_EXISTS_CUSTOMER_ID)).thenThrow(CustomerNotFoundException.class);
 

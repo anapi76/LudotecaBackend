@@ -35,6 +35,16 @@ public class GameServiceImpl implements GameService {
      * {@inheritDoc}
      */
     @Override
+    public Game get(Long id) {
+
+        //return authorRepository.findById(id).orElse(null);
+        return gameRepository.findById(id).orElseThrow(() -> new GameNotFoundException("Game not exists"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<Game> find(String title, Long idCategory) {
         GameSpecification titleSpec = new GameSpecification(new SearchCriteria("title", ":", title));
         GameSpecification categorySpec = new GameSpecification(new SearchCriteria("category.id", ":", idCategory));

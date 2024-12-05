@@ -22,8 +22,8 @@ INSERT INTO customer(name) VALUES ('Cliente 3');
 INSERT INTO customer(name) VALUES ('Cliente 4');
 INSERT INTO customer(name) VALUES ('Cliente 5');
 
-INSERT INTO loan(game_id,customer_id,loan_date,return_date) VALUES (2,2,'2024-12-01','2024-12-15');
-INSERT INTO loan(game_id,customer_id,loan_date,return_date) VALUES (1,1,'2024-12-03','2024-12-17');
+INSERT INTO loan(game_id,customer_id,loan_date,return_date) VALUES (2,3,'2024-12-01','2024-12-15');
+INSERT INTO loan(game_id,customer_id,loan_date,return_date) VALUES (2,1,'2024-12-03','2024-12-17');
 INSERT INTO loan(game_id,customer_id,loan_date,return_date) VALUES (3,3,'2024-11-28','2024-12-12');
 INSERT INTO loan(game_id,customer_id,loan_date,return_date) VALUES (4,4,'2024-12-02','2024-12-16');
 INSERT INTO loan(game_id,customer_id,loan_date,return_date) VALUES (5,5,'2024-11-30','2024-12-14');
