@@ -1,6 +1,5 @@
 package com.ccsw.tutorial.loan;
 
-import com.ccsw.tutorial.author.model.Author;
 import com.ccsw.tutorial.loan.model.Loan;
 import com.ccsw.tutorial.loan.model.LoanDto;
 import com.ccsw.tutorial.loan.model.LoanSearchDto;
@@ -36,7 +35,7 @@ public interface LoanService {
     void save(LoanDto dto);
 
     /**
-     * Método para crear o actualizar un {@link Author}
+     * Método para eliminar un {@link Loan}
      *
      * @param id PK de la entidad
      */
